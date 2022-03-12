@@ -32,33 +32,24 @@ func send(request: RestRequest) -> Future<RestResponse, Never> {
 }
 
 private func makeAFRequest(request: RestRequest) -> DataRequest {
-    let headers = HTTPHeaders(request.headers.map {
-        HTTPHeader(name: $0.key, value: "\($0.value)")
-    })
-    
-    let method = request.method.httpMethod
-    
-    var queries = [String: String]()
-    request.queries.forEach { queries[$0.key] = "\($0.value)" }
-    
     switch(request.method) {
     case .get, .delete:
         return AF.request(
             request.fullUrl,
-            method: method,
-            parameters: queries,
+            method: request.method.httpMethod,
+            parameters: request.queries.stringDict,
             encoder: .urlEncodedForm,
-            headers: headers,
+            headers: request.headers.httpHeaders,
             interceptor: nil,
             requestModifier: nil
         )
     case .post, .put:
         return AF.request(
-            request.fullUrl,
-            method: method,
-            parameters: queries,
-            encoder: .urlEncodedForm,
-            headers: headers,
+            request.fullUrlWithQuery,
+            method: request.method.httpMethod,
+            parameters: request.bodyParams?.stringDict,
+            encoding: URLEncoding(destination: .httpBody),
+            headers: request.headers.httpHeaders,
             interceptor: nil,
             requestModifier: nil
         )
@@ -68,7 +59,8 @@ private func makeAFRequest(request: RestRequest) -> DataRequest {
 private extension AFError {
     var restError: RestError {
         switch(self) {
-        case .createUploadableFailed(let error), .createURLRequestFailed(error: let error):
+        case .createUploadableFailed(let error),
+            .createURLRequestFailed(error: let error):
             return .invalidRequest(error)
             
         case .downloadedFileMoveFailed(error: let error):
@@ -105,5 +97,20 @@ private extension RestRequest.Method {
         case .put: return .put
         case .delete: return.delete
         }
+    }
+}
+
+private extension Dictionary where Key: ExpressibleByStringLiteral, Value: Any {
+    var stringDict: [String: String] {
+        var output = [String: String]()
+        forEach { output["\($0.key)"] = "\($0.value)" }
+        return output
+    }
+    
+    var httpHeaders: HTTPHeaders {
+        HTTPHeaders( map { .init(
+            name: "\($0.key)",
+            value: "\($0.value)"
+        )})
     }
 }

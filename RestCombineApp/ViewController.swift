@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     private func requestPhoto(page: Int) -> AnyPublisher<[Photo]?, Never>{
         var request = RestRequest()
         request.baseUrl = "https://picsum.photos"
-        request.path = "v2/list"
+        request.endPoint = "v2/list"
         request.queries = [
             "page": page,
             "limit": 100

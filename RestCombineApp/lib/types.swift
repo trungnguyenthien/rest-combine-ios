@@ -32,22 +32,6 @@ enum ReceiveThread {
 }
 
 struct RestRequest {
-    enum Body {
-        case none
-        case raw(String)
-        case formData(RestParam)
-        case formUrlEncoding(RestParam)
-        
-        func information() -> Information {
-            switch(self) {
-            case .none: return ["none": "-"]
-            case let .raw(value): return ["raw": value]
-            case let .formData(value): return ["formData": value]
-            case let .formUrlEncoding(value): return ["urlEncoding": value]
-            }
-        }
-    }
-    
     enum Method: String {
         case get
         case post
@@ -56,17 +40,25 @@ struct RestRequest {
     }
     
     var baseUrl = ""
-    var path = ""
+    var endPoint = ""
     var method = Method.get
     var headers = RestHeader()
     var queries = RestParam()
-    var body = Body.none
+    var bodyParams: RestParam? = .none
     
     func information() -> Information {
         return [:]
     }
     
-    var fullUrl: String { [baseUrl, path].joinedBySplash }
+    /// baseUrl + endPoint
+    var fullUrl: String { [baseUrl, endPoint].joinedBySplash }
+    
+    /// baseUrl + endPoint + query
+    var fullUrlWithQuery: String {
+        var urlComponents = URLComponents(string: fullUrl)
+        urlComponents?.queryItems = queries.map { .init(name: $0.key, value: "\($0.value)") }
+        return urlComponents?.url?.absoluteString ?? ""
+    }
 }
 
 struct RestResponse {
