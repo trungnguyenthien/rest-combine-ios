@@ -10,12 +10,11 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         let windowScene = UIWindowScene(session: session, connectionOptions: connectionOptions)
         self.window = UIWindow(windowScene: windowScene)
-        let rootVC = createMainVC()
+        let rootVC = makeViewController(target: .home)
         let rootNC = UINavigationController(rootViewController: rootVC)
         self.window?.rootViewController = rootNC
         self.window?.makeKeyAndVisible()

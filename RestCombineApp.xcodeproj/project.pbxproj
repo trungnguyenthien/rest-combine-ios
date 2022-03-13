@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		8741C37227DC17C4006F996C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741C37127DC17C4006F996C /* AppDelegate.swift */; };
 		8741C37427DC17C4006F996C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741C37327DC17C4006F996C /* SceneDelegate.swift */; };
-		8741C37627DC17C4006F996C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741C37527DC17C4006F996C /* MainViewController.swift */; };
-		8741C37927DC17C4006F996C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8741C37727DC17C4006F996C /* Main.storyboard */; };
 		8741C37B27DC17C5006F996C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8741C37A27DC17C5006F996C /* Assets.xcassets */; };
 		8741C37E27DC17C5006F996C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8741C37C27DC17C5006F996C /* LaunchScreen.storyboard */; };
 		8741C38827DC1982006F996C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8741C38727DC1982006F996C /* Alamofire */; };
@@ -32,8 +30,6 @@
 		8741C36E27DC17C4006F996C /* RestCombineApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestCombineApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8741C37127DC17C4006F996C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8741C37327DC17C4006F996C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8741C37527DC17C4006F996C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		8741C37827DC17C4006F996C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8741C37A27DC17C5006F996C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8741C37D27DC17C5006F996C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8741C37F27DC17C5006F996C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,12 +81,10 @@
 				8741C38527DC1835006F996C /* rest */,
 				8741C37127DC17C4006F996C /* AppDelegate.swift */,
 				8741C37327DC17C4006F996C /* SceneDelegate.swift */,
-				8741C37527DC17C4006F996C /* MainViewController.swift */,
 				87B6568427DEA2740083E286 /* dependency.swift */,
 				87B6567B27DDEF1D0083E286 /* router.swift */,
 				87B6567927DDA00C0083E286 /* service.swift */,
 				87B6567727DD88020083E286 /* repository.swift */,
-				8741C37727DC17C4006F996C /* Main.storyboard */,
 				8741C37A27DC17C5006F996C /* Assets.xcassets */,
 				8741C37C27DC17C5006F996C /* LaunchScreen.storyboard */,
 				8741C37F27DC17C5006F996C /* Info.plist */,
@@ -181,7 +175,6 @@
 				8741C37E27DC17C5006F996C /* LaunchScreen.storyboard in Resources */,
 				8741C37B27DC17C5006F996C /* Assets.xcassets in Resources */,
 				87B6568927DEAC5F0083E286 /* HomeViewController.xib in Resources */,
-				8741C37927DC17C4006F996C /* Main.storyboard in Resources */,
 				87B6568027DDFCA00083E286 /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +190,6 @@
 				8741C38A27DC19A1006F996C /* rest+alamofire.swift in Sources */,
 				87B6567A27DDA00C0083E286 /* service.swift in Sources */,
 				8741C38C27DC1F09006F996C /* rest+utils.swift in Sources */,
-				8741C37627DC17C4006F996C /* MainViewController.swift in Sources */,
 				87B6567827DD88020083E286 /* repository.swift in Sources */,
 				8741C38E27DC2092006F996C /* rest+models.swift in Sources */,
 				8741C37227DC17C4006F996C /* AppDelegate.swift in Sources */,
@@ -211,14 +203,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8741C37727DC17C4006F996C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8741C37827DC17C4006F996C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8741C37C27DC17C5006F996C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -357,7 +341,6 @@
 				INFOPLIST_FILE = RestCombineApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -385,7 +368,6 @@
 				INFOPLIST_FILE = RestCombineApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum RouteTarget {
-    case login
+    case home
     case detail(id: String)
     case web(url: String, title: String?)
 }
@@ -17,7 +17,11 @@ enum RouteTarget {
 func makeViewController(target: RouteTarget) -> UIViewController {
     switch(target) {
     case .detail: return DetailViewController()
-    case .login: return UIViewController()
+    case .home: return createHomeVC()
     case .web: return UIViewController()
     }
+}
+
+private func createHomeVC() -> UIViewController {
+    container.resolve(HomeViewController.self)!
 }

@@ -9,7 +9,7 @@ import Foundation
 import Swinject
 import UIKit
 
-private let container = Container()
+let container = Container()
 
 func registerDependency() {
     /// Fix type
@@ -32,8 +32,4 @@ func registerDependency() {
         vc.viewModel = resolver.resolve(HomeViewController.ViewModel.self)
         return vc
     }
-}
-
-func createMainVC() -> UIViewController {
-    container.resolve(HomeViewController.self)!
 }
