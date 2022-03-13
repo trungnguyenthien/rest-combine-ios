@@ -19,18 +19,6 @@ enum RestError: Error {
     case unknown(Error?)
 }
 
-enum ReceiveThread {
-    case current
-    case main
-    
-    var runLoop: RunLoop {
-        switch(self) {
-        case .current: return .current
-        case .main: return .main
-        }
-    }
-}
-
 struct RestRequest {
     enum Method: String {
         case get
@@ -114,17 +102,20 @@ struct RestResponse {
     let request: RestRequest
     let error: RestError?
     let data: Data?
+    let code: Int
     
-    init(data: Data, request: RestRequest) {
+    init(data: Data, code: Int, request: RestRequest) {
         self.data = data
         self.request = request
         self.error = nil
+        self.code = code
     }
     
-    init(error: RestError, request: RestRequest) {
+    init(error: RestError, code: Int, request: RestRequest) {
         self.error = error
         self.request = request
         self.data = nil
+        self.code = code
     }
 }
 

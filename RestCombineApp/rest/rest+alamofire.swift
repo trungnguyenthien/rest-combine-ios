@@ -12,22 +12,23 @@ import Combine
 ///https://codewithchris.com/alamofire/
 func send(request: RestRequest) -> Future<RestResponse, Never> {
     return Future { result in
-        func complete(data: Data? = nil, error: RestError? = nil) {
+        func complete(code: Int, data: Data? = nil, error: RestError? = nil) {
             if let data = data {
-                let response = RestResponse(data: data, request: request)
+                let response = RestResponse(data: data, code: code, request: request)
                 result(.success(response))
             } else if let error = error {
-                let response = RestResponse(error: error, request: request)
+                let response = RestResponse(error: error, code: code, request: request)
                 result(.success(response))
             }
         }
         makeAFRequest(request: request).response {
+            let code = $0.response?.statusCode ?? -1
             if let error = $0.error?.restError {
-                complete(error: error)
+                complete(code: code, error: error)
             } else if let data = $0.data {
-                complete(data: data)
+                complete(code: code, data: data)
             } else {
-                complete(error: .unknown(nil))
+                complete(code: code, error: .unknown(nil))
             }
         }
     }
