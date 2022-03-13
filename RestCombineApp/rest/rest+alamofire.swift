@@ -11,14 +11,14 @@ import Combine
 
 ///https://codewithchris.com/alamofire/
 func send(request: RestRequest) -> Future<RestResponse, Never> {
-    return Future { promise in
+    return Future { result in
         func complete(data: Data? = nil, error: RestError? = nil) {
             if let data = data {
-                let result = RestResponse(data: data, request: request)
-                promise(.success(result))
+                let response = RestResponse(data: data, request: request)
+                result(.success(response))
             } else if let error = error {
-                let result = RestResponse(error: error, request: request)
-                promise(.success(result))
+                let response = RestResponse(error: error, request: request)
+                result(.success(response))
             }
         }
         makeAFRequest(request: request).response {
@@ -26,6 +26,8 @@ func send(request: RestRequest) -> Future<RestResponse, Never> {
                 complete(error: error)
             } else if let data = $0.data {
                 complete(data: data)
+            } else {
+                complete(error: .unknown(nil))
             }
         }
     }
@@ -47,7 +49,7 @@ private func makeAFRequest(request: RestRequest) -> DataRequest {
         return AF.request(
             request.fullUrlWithQuery,
             method: request.method.httpMethod,
-            parameters: request.bodyParams?.stringDict,
+            parameters: request.bodyParams.stringDict,
             encoding: URLEncoding(destination: .httpBody),
             headers: request.headers.httpHeaders,
             interceptor: nil,

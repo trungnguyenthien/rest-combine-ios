@@ -15,7 +15,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-        
         let request1 = requestPhoto(page: 1)
         let request2 = requestPhoto(page: 2)
         
@@ -34,16 +33,20 @@ class ViewController: UIViewController {
         }
     }
     
-    private func requestPhoto(page: Int) -> AnyPublisher<[Photo]?, Never>{
-        var request = RestRequest()
-        request.baseUrl = "https://picsum.photos"
-        request.endPoint = "v2/list"
-        request.queries = [
-            "page": page,
-            "limit": 100
-        ]
+    private var defaultPhotoListRequest: RestRequest {
+        .init(
+           method: .get,
+           baseUrl: "https://picsum.photos",
+           endPoint: "v2/list",
+           defaultQueries: ["limit": 100]
+       )
+    }
+    
+    private func requestPhoto(page: Int) -> AnyPublisher<[Photo]?, Never> {
+        let request = defaultPhotoListRequest.appendingQueries(["page": page])
+        
         return send(request: request)
-            .map { parseToPhotos(data: $0.data) }
+            .map { parsing($0.data, to: [Photo].self) }
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }
@@ -58,10 +61,4 @@ struct Photo: Codable {
         case id, author, width, height, url
         case downloadURL = "download_url"
     }
-}
-
-func parseToPhotos(data: Data?) -> [Photo]? {
-    guard let data = data else { return nil }
-    let decoder = JSONDecoder()
-    return try? decoder.decode([Photo].self, from: data)
 }

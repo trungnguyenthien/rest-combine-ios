@@ -14,6 +14,10 @@ extension Dictionary where Key: ExpressibleByStringLiteral, Value: Any {
             left[k] = v
         }
     }
+    
+    func mergingAndReplacing(newDict: Self) -> Self {
+        merging(newDict, uniquingKeysWith: { _, new in new })
+    }
 }
 
 extension Sequence where Element == String {
@@ -23,3 +27,11 @@ extension Sequence where Element == String {
         return map { $0.trimmingCharacters(in: splashCharSet) }.joined(separator: splashChar)
     }
 }
+
+func parsing<T: Decodable>(_ data: Data?, to type: T.Type) -> T? {
+    guard let data = data else { return nil }
+    let decoder = JSONDecoder()
+    return try? decoder.decode(type, from: data)
+}
+
+

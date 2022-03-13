@@ -39,12 +39,12 @@ struct RestRequest {
         case delete
     }
     
-    var baseUrl = ""
-    var endPoint = ""
-    var method = Method.get
-    var headers = RestHeader()
-    var queries = RestParam()
-    var bodyParams: RestParam? = .none
+    let baseUrl: String
+    let endPoint: String
+    let method: Method
+    let headers: RestHeader
+    let queries: RestParam
+    let bodyParams: RestParam
     
     func information() -> Information {
         return [:]
@@ -58,6 +58,55 @@ struct RestRequest {
         var urlComponents = URLComponents(string: fullUrl)
         urlComponents?.queryItems = queries.map { .init(name: $0.key, value: "\($0.value)") }
         return urlComponents?.url?.absoluteString ?? ""
+    }
+    
+    init(
+        method: Method,
+        baseUrl: String,
+        endPoint: String,
+        defaultHeaders: RestHeader = .init(),
+        defaultQueries: RestParam = .init(),
+        defaultParams: RestParam = .init()
+    ) {
+        self.method = method
+        self.baseUrl = baseUrl
+        self.endPoint = endPoint
+        self.headers = defaultHeaders
+        self.queries = defaultQueries
+        self.bodyParams = defaultParams
+    }
+    
+    func appendingQueries(_ newOne: RestParam) -> Self {
+        .init(
+            method: method,
+            baseUrl: baseUrl,
+            endPoint: endPoint,
+            defaultHeaders: headers,
+            defaultQueries: queries.mergingAndReplacing(newDict: newOne),
+            defaultParams: bodyParams
+        )
+    }
+    
+    func appendingHeaders(_ newOne: RestParam) -> Self {
+        .init(
+            method: method,
+            baseUrl: baseUrl,
+            endPoint: endPoint,
+            defaultHeaders: headers.mergingAndReplacing(newDict: newOne),
+            defaultQueries: queries,
+            defaultParams: bodyParams
+        )
+    }
+    
+    func appendingParams(_ newOne: RestParam) -> Self {
+        .init(
+            method: method,
+            baseUrl: baseUrl,
+            endPoint: endPoint,
+            defaultHeaders: headers,
+            defaultQueries: queries,
+            defaultParams: bodyParams.mergingAndReplacing(newDict: newOne)
+        )
     }
 }
 
