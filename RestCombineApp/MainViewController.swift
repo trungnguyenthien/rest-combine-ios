@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     var viewModel = ViewModel()
 
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension MainViewController {
     class ViewModel {
         let service = ApplicationService(
             photoRepo: PhotoRepositoryImpl(
