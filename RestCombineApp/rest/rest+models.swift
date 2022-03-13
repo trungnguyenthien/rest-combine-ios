@@ -64,6 +64,17 @@ struct RestRequest {
         self.bodyParams = defaultParams
     }
     
+    func endPoint(_ newOne: String) -> Self {
+        .init(
+            method: method,
+            baseUrl: baseUrl,
+            endPoint: newOne,
+            defaultHeaders: headers,
+            defaultQueries: queries,
+            defaultParams: bodyParams
+        )
+    }
+    
     func appendingQueries(_ newOne: RestParam) -> Self {
         .init(
             method: method,

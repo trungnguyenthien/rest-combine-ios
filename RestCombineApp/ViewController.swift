@@ -9,56 +9,64 @@ import UIKit
 import Combine
 
 class ViewController: UIViewController {
+    
+    var viewModel = ViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        let request1 = requestPhoto(page: 1)
-        let request2 = requestPhoto(page: 2)
-        
-        let zipProducer = Publishers.Zip(request1, request2)
-            .map { page1, page2 -> [Photo] in
-                var output = [Photo]()
-                let page1 = page1 ?? []
-                let page2 = page2 ?? []
-                output.append(contentsOf: page1)
-                output.append(contentsOf: page2)
-                return output
-            }.eraseToAnyPublisher()
-        
-        zipProducer.sink { all in
-            print(all)
+        viewModel.$photos.receive(on: RunLoop.main).sink { photos in
+            print("Reload data \(photos.count)")
         }
     }
-    
-    private var defaultPhotoListRequest: RestRequest {
-        .init(
-           method: .get,
-           baseUrl: "https://picsum.photos",
-           endPoint: "v2/list",
-           defaultQueries: ["limit": 100]
-       )
-    }
-    
-    private func requestPhoto(page: Int) -> AnyPublisher<[Photo]?, Never> {
-        let request = defaultPhotoListRequest.appendingQueries(["page": page])
-        
-        return send(request: request)
-            .map { parsing($0.data, to: [Photo].self) }
-            .receive(on: RunLoop.main)
-            .eraseToAnyPublisher()
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.loadFirst()
     }
 }
 
-struct Photo: Codable {
-    let id, author: String
-    let width, height: Int
-    let url, downloadURL: String
-
-    enum CodingKeys: String, CodingKey {
-        case id, author, width, height, url
-        case downloadURL = "download_url"
+extension ViewController {
+    class ViewModel {
+        let service = ApplicationService(
+            photoRepo: PhotoRepositoryImpl(
+                client: AlamofireApiClient()
+            )
+        )
+        
+        @Published private(set) var photos: [Photo] = []
+        private var cancellables: Set<AnyCancellable> = []
+        private var nextPageNumber = 0
+        
+        func loadFirst() {
+            nextPageNumber = 0
+            doLoadNext(reset: true)
+        }
+        
+        func loadNext() {
+            doLoadNext()
+        }
+        
+        private func doLoadNext(reset: Bool = false) {
+            if isEndPage { return }
+            service.listPhoto(page: nextPageNumber).sink { [weak self] page in
+                guard let self = self, let page = page else { return }
+                if reset { self.photos.removeAll() }
+                
+                self.photos += page
+                if page.count == 0 {
+                    self.nextPageNumber += 1
+                } else {
+                    self.markAsEndPage()
+                }
+            }.store(in: &cancellables)
+        }
+        
+        
+        private var isEndPage: Bool {
+            nextPageNumber == -1
+        }
+        
+        private func markAsEndPage() {
+            nextPageNumber = -1
+        }
     }
 }

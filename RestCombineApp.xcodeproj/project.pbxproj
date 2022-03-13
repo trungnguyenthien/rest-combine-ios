@@ -17,6 +17,8 @@
 		8741C38A27DC19A1006F996C /* rest+alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741C38927DC19A1006F996C /* rest+alamofire.swift */; };
 		8741C38C27DC1F09006F996C /* rest+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741C38B27DC1F09006F996C /* rest+utils.swift */; };
 		8741C38E27DC2092006F996C /* rest+models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741C38D27DC2092006F996C /* rest+models.swift */; };
+		87B6567827DD88020083E286 /* repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B6567727DD88020083E286 /* repository.swift */; };
+		87B6567A27DDA00C0083E286 /* service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B6567927DDA00C0083E286 /* service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		8741C38927DC19A1006F996C /* rest+alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "rest+alamofire.swift"; sourceTree = "<group>"; };
 		8741C38B27DC1F09006F996C /* rest+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "rest+utils.swift"; sourceTree = "<group>"; };
 		8741C38D27DC2092006F996C /* rest+models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "rest+models.swift"; sourceTree = "<group>"; };
+		87B6567727DD88020083E286 /* repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = repository.swift; sourceTree = "<group>"; };
+		87B6567927DDA00C0083E286 /* service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,8 @@
 				8741C37127DC17C4006F996C /* AppDelegate.swift */,
 				8741C37327DC17C4006F996C /* SceneDelegate.swift */,
 				8741C37527DC17C4006F996C /* ViewController.swift */,
+				87B6567927DDA00C0083E286 /* service.swift */,
+				87B6567727DD88020083E286 /* repository.swift */,
 				8741C37727DC17C4006F996C /* Main.storyboard */,
 				8741C37A27DC17C5006F996C /* Assets.xcassets */,
 				8741C37C27DC17C5006F996C /* LaunchScreen.storyboard */,
@@ -164,8 +170,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8741C38A27DC19A1006F996C /* rest+alamofire.swift in Sources */,
+				87B6567A27DDA00C0083E286 /* service.swift in Sources */,
 				8741C38C27DC1F09006F996C /* rest+utils.swift in Sources */,
 				8741C37627DC17C4006F996C /* ViewController.swift in Sources */,
+				87B6567827DD88020083E286 /* repository.swift in Sources */,
 				8741C38E27DC2092006F996C /* rest+models.swift in Sources */,
 				8741C37227DC17C4006F996C /* AppDelegate.swift in Sources */,
 				8741C37427DC17C4006F996C /* SceneDelegate.swift in Sources */,
