@@ -1,29 +1,12 @@
 //
-//  HomeViewController.swift
+//  HomeViewController+ViewModel.swift
 //  RestCombineApp
 //
 //  Created by Trung on 14/03/2022.
 //
 
-import UIKit
+import Foundation
 import Combine
-
-class HomeViewController: UIViewController {
-
-    var viewModel: ViewModel!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        viewModel.$photos.receive(on: RunLoop.main).sink { photos in
-            print("Reload data \(photos.count)")
-        }
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        viewModel.loadFirst()
-    }
-}
-
 
 extension HomeViewController {
     class ViewModel {
@@ -34,6 +17,8 @@ extension HomeViewController {
         }
         
         @Published private(set) var photos: [Photo] = []
+        @Published private(set) var isLoading = false
+        
         private var cancellables: Set<AnyCancellable> = []
         private var nextPageNumber = 0
         
@@ -52,11 +37,16 @@ extension HomeViewController {
         
         private func doLoadNext(reset: Bool = false) {
             guard !isEndPage else { return }
+            isLoading = true
             service.listPhoto(page: nextPageNumber).sink { [weak self] page in
+                self?.isLoading = false
                 guard let self = self, let page = page else { return }
-                if reset { self.photos.removeAll() }
+                if reset {
+                    self.photos = page
+                } else {
+                    self.photos += page
+                }
                 
-                self.photos += page
                 if page.count == 0 {
                     self.nextPageNumber += 1
                 } else {

@@ -24,7 +24,8 @@ extension Sequence where Element == String {
     var joinedBySplash: String {
         let splashChar = "/"
         let splashCharSet = CharacterSet(charactersIn: splashChar)
-        return map { $0.trimmingCharacters(in: splashCharSet) }.joined(separator: splashChar)
+        return map { $0.trimmingCharacters(in: splashCharSet) }
+            .joined(separator: splashChar)
     }
 }
 

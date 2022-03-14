@@ -24,6 +24,7 @@
 		87B6569127DEBFA20083E286 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87B6568D27DEBFA20083E286 /* HomeViewController.xib */; };
 		87B6569227DEBFA20083E286 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B6568E27DEBFA20083E286 /* HomeViewController.swift */; };
 		87B6569327DEBFA20083E286 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87B6568F27DEBFA20083E286 /* DetailViewController.xib */; };
+		87B6569A27DEC1D40083E286 /* HomeViewController+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B6569927DEC1D40083E286 /* HomeViewController+ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		87B6568D27DEBFA20083E286 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		87B6568E27DEBFA20083E286 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		87B6568F27DEBFA20083E286 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		87B6569927DEC1D40083E286 /* HomeViewController+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +108,9 @@
 		87B6568B27DEBFA20083E286 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				87B6568C27DEBFA20083E286 /* DetailViewController.swift */,
-				87B6568D27DEBFA20083E286 /* HomeViewController.xib */,
-				87B6568E27DEBFA20083E286 /* HomeViewController.swift */,
-				87B6568F27DEBFA20083E286 /* DetailViewController.xib */,
+				87B6569827DEC1AB0083E286 /* web */,
+				87B6569727DEC1A50083E286 /* detail */,
+				87B6569627DEC1A00083E286 /* home */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -128,6 +129,32 @@
 				87B6567727DD88020083E286 /* repository.swift */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		87B6569627DEC1A00083E286 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				87B6568D27DEBFA20083E286 /* HomeViewController.xib */,
+				87B6568E27DEBFA20083E286 /* HomeViewController.swift */,
+				87B6569927DEC1D40083E286 /* HomeViewController+ViewModel.swift */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		87B6569727DEC1A50083E286 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				87B6568C27DEBFA20083E286 /* DetailViewController.swift */,
+				87B6568F27DEBFA20083E286 /* DetailViewController.xib */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		87B6569827DEC1AB0083E286 /* web */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = web;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +245,7 @@
 				87B6567827DD88020083E286 /* repository.swift in Sources */,
 				8741C38E27DC2092006F996C /* rest+models.swift in Sources */,
 				8741C37227DC17C4006F996C /* AppDelegate.swift in Sources */,
+				87B6569A27DEC1D40083E286 /* HomeViewController+ViewModel.swift in Sources */,
 				8741C37427DC17C4006F996C /* SceneDelegate.swift in Sources */,
 				87B6567C27DDEF1D0083E286 /* Router.swift in Sources */,
 				87B6569227DEBFA20083E286 /* HomeViewController.swift in Sources */,
