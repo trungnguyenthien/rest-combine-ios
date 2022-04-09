@@ -1,10 +1,3 @@
-//
-//  types.swift
-//  RestCombineApp
-//
-//  Created by Trung on 12/03/2022.
-//
-
 import Foundation
 import Combine
 
@@ -132,4 +125,19 @@ struct RestResponse {
 
 protocol ApiClient {
     func send(request: RestRequest) -> Future<RestResponse, Never>
+}
+
+private extension Sequence where Element == String {
+    var joinedBySplash: String {
+        let splashChar = "/"
+        let splashCharSet = CharacterSet(charactersIn: splashChar)
+        return map { $0.trimmingCharacters(in: splashCharSet) }
+            .joined(separator: splashChar)
+    }
+}
+
+private extension Dictionary where Key: ExpressibleByStringLiteral, Value: Any {
+    func mergingAndReplacing(newDict: Self) -> Self {
+        merging(newDict, uniquingKeysWith: { _, new in new })
+    }
 }

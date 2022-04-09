@@ -1,16 +1,7 @@
-//
-//  coreLib.swift
-//  RestCombineApp
-//
-//  Created by Trung on 12/03/2022.
-//
-
 import Foundation
-import Alamofire
+import Alamofire ///https://codewithchris.com/alamofire/
 import Combine
 
-///https://codewithchris.com/alamofire/
-///
 class AlamofireApiClient: ApiClient {
     func send(request: RestRequest) -> Future<RestResponse, Never> {
         Future { result in
